@@ -7,7 +7,6 @@ import com.example.rickandmorty.models.RickAndMortyResponse
 import com.example.rickandmorty.models.character.CharacterModel
 
 class CharacterViewModel : ViewModel() {
-
     private val repository = CharacterRepository()
     fun fetchCharacter() : MutableLiveData<RickAndMortyResponse<CharacterModel>>{
         return repository.fetchCharacter()
