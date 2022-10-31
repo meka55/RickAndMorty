@@ -12,6 +12,7 @@ import com.example.rickandmorty.ui.fragments.episodes.EpisodeFragment
 import com.example.rickandmorty.ui.fragments.location.LocationFragment
 
 class MainActivity : AppCompatActivity() {
+
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
