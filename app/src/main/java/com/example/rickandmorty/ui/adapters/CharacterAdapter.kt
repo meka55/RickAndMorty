@@ -16,7 +16,7 @@ class CharacterAdapter : ListAdapter<CharacterModel, CharacterAdapter.ViewHolder
         RecyclerView.ViewHolder(binding.root) {
         fun onBind(item: CharacterModel?) {
             binding.tvCharacter.text = item?.name
-            binding.imCharacter.load(item?.image)
+            binding.imCharacter. load(item?.image)
             binding.tvStatus.text = item?.status
             binding.tvSpecies.text = item?.species
             binding.tvLocation.text = item?.location?.name
