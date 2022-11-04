@@ -6,6 +6,7 @@ import retrofit2.Call
 import retrofit2.http.GET
 
 interface EpisodeApi {
+
     @GET("api/episode")
     fun fetchEpisode(): Call<RickAndMortyResponse<EpisodeModel>>
 }

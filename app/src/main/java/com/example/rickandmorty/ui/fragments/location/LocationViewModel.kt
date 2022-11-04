@@ -1,5 +1,6 @@
 package com.example.rickandmorty.ui.fragments.location
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.rickandmorty.App
@@ -13,8 +14,14 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class LocationViewModel : ViewModel() {
+
     private val repository = LocationRepository()
+
     fun fetchLocation(): MutableLiveData<RickAndMortyResponse<LocationModel>> {
         return repository.fetchLocation()
+    }
+
+    fun getAllFromRoom(): LiveData<List<LocationModel>> {
+        return repository.getEpisode()
     }
 }

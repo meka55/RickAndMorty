@@ -10,7 +10,7 @@
         style="@style/CardView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:backgroundTint="@color/purple_500"
+        android:backgroundTint="@color/grey"
         android:elevation="16dp"
         app:cardCornerRadius="14dp">
 

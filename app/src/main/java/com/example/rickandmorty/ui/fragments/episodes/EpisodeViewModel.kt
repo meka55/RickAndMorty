@@ -1,5 +1,6 @@
 package com.example.rickandmorty.ui.fragments.episodes
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.rickandmorty.App
@@ -13,8 +14,14 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class EpisodeViewModel : ViewModel() {
+
     private val repository = EpisodeRepository()
+
     fun fetchEpisode(): MutableLiveData<RickAndMortyResponse<EpisodeModel>> {
         return repository.fetchEpisode()
+    }
+
+    fun getAllFromRoom(): LiveData<List<EpisodeModel>> {
+        return repository.getEpisode()
     }
 }

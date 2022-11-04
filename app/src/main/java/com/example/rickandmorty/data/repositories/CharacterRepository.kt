@@ -1,5 +1,6 @@
 package com.example.rickandmorty.data.repositories
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.rickandmorty.App
 import com.example.rickandmorty.models.RickAndMortyResponse
@@ -9,16 +10,21 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class CharacterRepository {
+
     val data: MutableLiveData<RickAndMortyResponse<CharacterModel>> = MutableLiveData()
 
     fun fetchCharacter(): MutableLiveData<RickAndMortyResponse<CharacterModel>> {
         App.characterApi?.fetchCharacter()
             ?.enqueue(object : Callback<RickAndMortyResponse<CharacterModel>> {
+
                 override fun onResponse(
                     call: Call<RickAndMortyResponse<CharacterModel>>,
                     response: Response<RickAndMortyResponse<CharacterModel>>
                 ) {
-                    data.value = response.body()
+                    response.body()?.let {
+                        App.appDatabase?.characterDao()?.insertList(it.results)
+                        data.value = it
+                    }
                 }
 
                 override fun onFailure(
@@ -29,5 +35,9 @@ class CharacterRepository {
                 }
             })
         return data
+    }
+
+    fun getCharacters(): LiveData<List<CharacterModel>>{
+        return App.appDatabase?.characterDao()?.getAllList()!!
     }
 }

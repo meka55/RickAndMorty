@@ -1,10 +1,17 @@
 package com.example.rickandmorty.models.character
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import androidx.room.TypeConverters
+import com.example.rickandmorty.base.IBaseDiffUtil
 import com.google.gson.annotations.SerializedName
 
+@Entity(tableName = "character")
 data class CharacterModel(
+
     @SerializedName("id")
-    val id: Int,
+    @PrimaryKey(autoGenerate = true)
+    override val id: Int,
 
     @SerializedName("name")
     val name: String,
@@ -23,4 +30,4 @@ data class CharacterModel(
 
     @SerializedName("origin")
     val origin: Origin
-)
+):IBaseDiffUtil
