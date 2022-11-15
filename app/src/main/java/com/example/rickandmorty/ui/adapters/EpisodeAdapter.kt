@@ -2,6 +2,7 @@ package com.example.rickandmorty.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -9,15 +10,19 @@ import com.example.rickandmorty.base.BaseDiffUtilItemCallback
 import com.example.rickandmorty.databinding.ItemEpisodeBinding
 import com.example.rickandmorty.models.episode.EpisodeModel
 
-class EpisodeAdapter :
-    ListAdapter<EpisodeModel, EpisodeAdapter.ViewHolder>(BaseDiffUtilItemCallback()) {
+class EpisodeAdapter(
+    private val onClick: OnClick
+    ):PagingDataAdapter<EpisodeModel, EpisodeAdapter.ViewHolder>(BaseDiffUtilItemCallback()) {
 
     class ViewHolder(private val binding: ItemEpisodeBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun onBind(item: EpisodeModel?) {
+        fun onBind(item: EpisodeModel?, onClick: OnClick) {
             binding.tvEpisodeName.text = item?.name
             binding.tvAirDate.text = item?.air_date
             binding.tvEpisodeCode.text = item?.episode
+            itemView.setOnClickListener {
+                onClick.listener(item?.id)
+            }
         }
     }
 
@@ -33,6 +38,9 @@ class EpisodeAdapter :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.onBind(getItem(position))
+        holder.onBind(getItem(position),onClick)
     }
+}
+interface EpisodeOnClick {
+    fun listener(id: Int?)
 }

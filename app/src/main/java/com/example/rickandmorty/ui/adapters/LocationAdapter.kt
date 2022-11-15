@@ -2,6 +2,7 @@ package com.example.rickandmorty.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -10,15 +11,19 @@ import com.example.rickandmorty.base.BaseDiffUtilItemCallback
 import com.example.rickandmorty.databinding.ItemLocationBinding
 import com.example.rickandmorty.models.location.LocationModel
 
-class LocationAdapter :
-    ListAdapter<LocationModel, LocationAdapter.ViewHolder>(BaseDiffUtilItemCallback()) {
+class LocationAdapter (
+    private val onClick: OnClick
+    ):PagingDataAdapter<LocationModel, LocationAdapter.ViewHolder>(BaseDiffUtilItemCallback()) {
 
     class ViewHolder(private val binding: ItemLocationBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-        fun onBind(item: LocationModel?) {
+        RecyclerView.ViewHolder(binding.root,) {
+        fun onBind(item: LocationModel?,onClick: OnClick) {
             binding.tvLocationName.text = item?.name
             binding.tvLocationType.text = item?.type
             binding.tvDimension.text = item?.dimension
+            itemView.setOnClickListener {
+                onClick.listener(item?.id)
+            }
         }
     }
 
@@ -34,6 +39,10 @@ class LocationAdapter :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.onBind(getItem(position))
+        holder.onBind(getItem(position),onClick)
     }
+}
+
+interface LocationOnClick {
+    fun listener(id: Int?)
 }

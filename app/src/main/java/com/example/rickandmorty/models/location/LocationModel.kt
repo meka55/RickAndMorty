@@ -6,11 +6,9 @@ import androidx.room.TypeConverters
 import com.example.rickandmorty.base.IBaseDiffUtil
 import com.google.gson.annotations.SerializedName
 
-@Entity(tableName = "location")
 data class LocationModel(
 
     @SerializedName("id")
-    @PrimaryKey
     override val id: Int,
 
     @SerializedName("name")

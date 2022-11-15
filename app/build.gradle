@@ -2,6 +2,9 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
+    id 'androidx.navigation.safeargs.kotlin'
+    //hilt
+    id 'com.google.dagger.hilt.android'
 }
 
 android {
@@ -62,7 +65,7 @@ dependencies {
     implementation "com.github.kirich1409:viewbindingpropertydelegate-noreflection:$view_binding_property_delegate"
 
     // Navigation
-    def nav_version = "2.3.5"
+    def nav_version = "2.5.3"
 
     implementation "com.google.android.material:material:1.2.0"
 
@@ -92,4 +95,12 @@ dependencies {
 
     //Coil
     implementation("io.coil-kt:coil:2.2.2")
+
+    //paging3
+    implementation "androidx.paging:paging-runtime-ktx:3.1.1"
+
+    //Hilt
+    def hilt_version = "2.42"
+    implementation "com.google.dagger:hilt-android:$hilt_version"
+    kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
 }
